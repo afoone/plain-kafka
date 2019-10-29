@@ -13,15 +13,16 @@ services:
     links: 
       - zookeeper:tasks.zookeeper
   broker:
-    image: qnib/plain-kafka:2019-01-28_2.1.0
+    image: ches/kafka
     ports:
       - "9092:9092"
+      - "7203:7203"
     depends_on: 
       - zookeeper
-    links: 
-      - zookeeper:tasks.zookeeper
     environment:
       KAFKA_BROKER_ID: '1'
+      ZOOKEEPER_IP: 'zookeeper'
+
 
 networks:
   default:
