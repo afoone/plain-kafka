@@ -12,8 +12,11 @@ services:
       - zookeeper
     links: 
       - zookeeper:tasks.zookeeper
-  broker:
+  kafka:
     image: ches/kafka
+    volumes:
+      - kafka-data:/data
+      - kafka-logs:/logs
     ports:
       - "9092:9092"
       - "7203:7203"
@@ -23,6 +26,9 @@ services:
       KAFKA_BROKER_ID: '1'
       ZOOKEEPER_IP: 'zookeeper'
 
+volumes:
+  kafka-data:
+  kafka-logs:
 
 networks:
   default:
