@@ -8,22 +8,9 @@ services:
     image: qnib/plain-zkui
     ports:
       - "9090:9090"
-    depends_on: 
-      - zookeeper
-    links: 
-      - zookeeper:tasks.zookeeper
   broker:
     image: qnib/plain-kafka:2019-01-28_2.1.0
     ports:
       - "9092:9092"
-    depends_on: 
-      - zookeeper
-    links: 
-      - zookeeper:tasks.zookeeper
     environment:
-      KAFKA_BROKER_ID: '1'
-
-networks:
-  default:
-    external: 
-      name: kafka
+      KAFKA_BROKER_ID: '{{.Task.Slot}}'
